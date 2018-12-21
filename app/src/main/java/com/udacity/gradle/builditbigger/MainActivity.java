@@ -6,13 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.android.javajokeslib.JavaJokesSrc;
 import com.example.android.jokesdisplaylib.JokesDisplayActivity;
+import com.udacity.gradle.builditbigger.backend.myApi.model.MyBean;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements JokesEndpointsAsyncTask.JokesListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +38,20 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     public void tellJoke(View view) {
-        String jokeFromJavaModule = new JavaJokesSrc().getGoodJoke();
-        Intent intent = new Intent(this, JokesDisplayActivity.class);
-        intent.putExtra(JokesDisplayActivity.JOKE_KEY, jokeFromJavaModule);
-        startActivity(intent);
-        Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
+        new JokesEndpointsAsyncTask().execute(this);
+    }
+
+    @Override
+    public void onComplete(MyBean joke) {
+        if (joke != null) {
+            String jokeFromJavaModule = joke.getData();
+            Intent intent = new Intent(this, JokesDisplayActivity.class);
+            intent.putExtra(JokesDisplayActivity.JOKE_KEY, jokeFromJavaModule);
+            startActivity(intent);
+        }
     }
 }

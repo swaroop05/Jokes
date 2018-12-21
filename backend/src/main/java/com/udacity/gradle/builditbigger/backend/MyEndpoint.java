@@ -5,9 +5,9 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 
-import javax.inject.Named;
-
-/** An endpoint class we are exposing */
+/**
+ * An endpoint class we are exposing
+ */
 @Api(
         name = "myApi",
         version = "v1",
@@ -25,10 +25,6 @@ public class MyEndpoint {
         JavaJokesSrc javaJokesSrc = new JavaJokesSrc();
         String joke = javaJokesSrc.getGoodJoke();
         response.setData(joke);
-
         return response;
     }
-
-
-
 }

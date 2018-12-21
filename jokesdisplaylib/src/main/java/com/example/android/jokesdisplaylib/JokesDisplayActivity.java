@@ -1,12 +1,13 @@
 package com.example.android.jokesdisplaylib;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 public class JokesDisplayActivity extends AppCompatActivity {
     public static String JOKE_KEY = "Joke key";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
